@@ -102,8 +102,8 @@ int (*cross_secure_sprintf)(char *, size_t, const char *, ...) = snprintf;
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 static CFFGLPluginInfo PluginInfo ( 
 	ShaderMaker::CreateInstance,		// Create method
-	"+138",								// *** Plugin unique ID (4 chars) - this must be unique for each plugin
-	"+TVtest2",						// *** Plugin name - make it different for each plugin 
+	"+134",								// *** Plugin unique ID (4 chars) - this must be unique for each plugin
+	"+Clock",						// *** Plugin name - make it different for each plugin 
 	1,						   			// API major version number 													
 	006,								// API minor version number	
 	1,									// *** Plugin major version number
@@ -155,46 +155,45 @@ void main()
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 char *fragmentShaderCode = STRINGIFY (
 // ==================== PASTE WITHIN THESE LINES =======================
-void mainImage(out vec4 fragColor, in vec2 fragCoord)
+ 
+//source shader code from kristoflovas https://www.shadertoy.com/view/ll3yWj
+
+float line(vec2 uv, vec2 p1, vec2 p2, float w, float f)
 {
-	vec2 xy = fragCoord / iResolution.xy;
-	vec4 col = vec4(1.0, 1.0, 1.0, 1.0);
-	if (xy.x > 0.125) {
-		col.r = 1.0;
-		col.g = 1.0;
-		col.b = 0.0;
+	vec2 dif = p2 - p1;
+	return 1. - clamp((distance((uv - p1) - clamp(dot(uv - p1, dif) / dot(dif, dif), 0., 1.)*dif, vec2(0., 0.)) - w) / f, 0., 1.);
+}
+//orbiting point
+vec2 orbit(float rot, float dist)
+{
+	return vec2(sin((-rot - .5)*6.2831), cos((-rot - .5)*6.2831))*dist;
+}
+
+//render
+void mainImage(out vec4 clock, in vec2 fragCoord)
+{
+	float ar = iResolution.x / iResolution.y;
+	vec2 uv = fragCoord / iResolution.xy;
+	uv = vec2(uv.x, uv.y)*vec2(ar, 1.) - vec2((ar - 1.) / 2., 0.);
+	// init clock to 0 to avoid error on some certain graphics cards
+	clock.x = 0.;
+
+	//pointers
+	vec2 HP = orbit(1. / 43200.*iDate.w, .22);
+	vec2 MP = orbit(1. / 3600.*iDate.w, .33);
+	vec2 SP = orbit(1. / 60.*iDate.w, .44);
+	clock.x += line(uv - vec2(.5, .5), vec2(0., 0.) - HP * .2, HP, .015, .0025) + line(uv - vec2(.5, .5), vec2(0., 0.) - MP * .2, MP, .0075, .0025) + line(uv - vec2(.5, .5), vec2(0., 0.) - SP * .2, SP, .005, .0025);
+
+	//markings
+	for (int i = 0; i < 60; i++)
+	{
+		float IsHour = ceil(mod(float(i), 5.) / 5.);
+		vec2 point1 = orbit(1. / 60.*float(i), mix(.35, .4, IsHour));
+		vec2 point2 = point1 * mix(1.3, 1.15, IsHour);
+		clock.x += line(uv - vec2(.5, .5), point1, point2, mix(.01, .002, IsHour), .0025);
 	}
-	if (xy.x > 0.25) {
-		col.r = 0.0;
-		col.g = 1.0;
-		col.b = 1.0;
-	}
-	if (xy.x > 0.375) {
-		col.r = 0.0;
-		col.g = 1.0;
-		col.b = 0.0;
-	}
-	if (xy.x > 0.5) {
-		col.r = 1.0;
-		col.g = 0.0;
-		col.b = 1.0;
-	}
-	if (xy.x > 0.625) {
-		col.r = 1.0;
-		col.g = 0.0;
-		col.b = 0.0;
-	}
-	if (xy.x > 0.75) {
-		col.r = 0.0;
-		col.g = 0.0;
-		col.b = 1.0;
-	}
-	if (xy.x > 0.875) {
-		col.r = 0.0;
-		col.g = 0.0;
-		col.b = 0.0;
-	}
-	fragColor = col;
+
+	clock = vec4(clock.x, clock.x, clock.x, 1.0);
 }
 
 
