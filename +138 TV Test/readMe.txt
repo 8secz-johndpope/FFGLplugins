@@ -1,17 +1,12 @@
 ///////////////////////////////////////////////////
-// Color TB TECT Card 16:9 
+//Color TV Test Card 16:9 
 
-// from 4:3 original ratio
-// USSR, since 1971 
-// contains realtime digital clock 
-
-// FFGL Plugin ID:+121
-// made by checkered 2019
+// FFGL Plugin ID: +138
+// Made by checkered 2019
 // type: source
 
 // no ajustable parameters
 // no alpha channel
- 
 
 // How to use:
 // Replace ShaderMaker.cpp from https://github.com/leadedge/ShaderMaker with this ShaderMaker.cpp
@@ -19,6 +14,7 @@
 // Put it into User/Documents/Resolume..6+/Extra Effects
 // Run Resolume / Check Sources or Effects Tabs
  
+
 // Made with ShaderMaker by Lynn Jarvis / leadedge / donate http://spout.zeal.co/donations/
 
 ///////////////////////////////////////////////////
@@ -34,3 +30,4 @@
 //(https://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US) unless otherwise specified.
 
 /////////////////////////////////////////////////////
+

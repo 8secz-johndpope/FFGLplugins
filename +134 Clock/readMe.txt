@@ -1,20 +1,34 @@
+///////////////////////////////////////////////////
 // Analogue Wall Clock 
-/shows the time of your computer
+
+// FFGL Plugin ID: +134
+// made by checkered 2019
+// type: source
+
+
+// shows the system time of your computer
+// no ajustable parameters
+// no alpha channel
 
 // How to use:
-/ Replace ShaderMaker.cpp from https://github.com/leadedge/ShaderMaker with this ShaderMaker.cpp
-/ Build the plugin with VisualStudio or XCode
-/ Put it into User/Documents/Resolume..6+/Extra Effects
-/ Run Resolume / Check Sources or Effects Tabs
+// Replace ShaderMaker.cpp from https://github.com/leadedge/ShaderMaker with this ShaderMaker.cpp
+// Build the plugin with VisualStudio or XCode
+// Put it into User/Documents/Resolume..6+/Extra Effects
+// Run Resolume / Check Sources or Effects Tabs
  
-/ FFGL Plugin ID: +134
-/ type: source
 
-/ no ajustable parameters
-/ no alpha channel
+// Made with ShaderMaker by Lynn Jarvis / leadedge / donate http://spout.zeal.co/donations/
 
-//source shader code from kristoflovas https://www.shadertoy.com/view/ll3yWj
+///////////////////////////////////////////////////
 
-// made with ShaderMaker by Lynn Jarvis / leadedge / donate
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranties of
+// MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// <http://www.gnu.org/licenses/>.
 
-// by checkered 2019
+// Shaders, originally derived from the ShaderToy website, are licensed 
+// under Attribution-NonCommercial-ShareAlike 3.0 
+//(https://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US) unless otherwise specified.
+
+/////////////////////////////////////////////////////
